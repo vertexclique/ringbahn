@@ -1,4 +1,4 @@
-%{"bunt": {:hex, :bunt, "0.1.6", "5d95a6882f73f3b9969fdfd1953798046664e6f77ec4e486e6fafc7caad97c6f", [:mix], []},
+%{"bunt": {:hex, :bunt, "0.2.0", "951c6e801e8b1d2cbe58ebbd3e616a869061ddadcc4863d0a2182541acae9a38", [:mix], []},
   "cachex": {:hex, :cachex, "2.0.1", "8167a8a36eedeb7a0f124a78183da637042ddebf20eda83fa8126669fdf0e8ca", [:mix], [{:eternal, "~> 1.1", [hex: :eternal, optional: false]}]},
   "certifi": {:hex, :certifi, "0.7.0", "861a57f3808f7eb0c2d1802afeaae0fa5de813b0df0979153cbafcd853ababaf", [:rebar3], []},
   "chumak": {:hex, :chumak, "1.1.2", "24dcf5b64f4e6869f15071b9c572d4c728f30b09b3a940663c488c896af9ed78", [:rebar3], []},

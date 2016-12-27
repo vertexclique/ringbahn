@@ -10,6 +10,8 @@ defmodule Ringbahn.ZMQ do
   use GenServer
   require Logger
 
+  alias Ringbahn.AppLogger
+
   def start_link(config) do
     socket_data =
       config
@@ -58,15 +60,23 @@ defmodule Ringbahn.ZMQ do
 
   def bind_push_socket(host, identity, port) do
     {:ok, socket} = :chumak.socket(:push, to_charlist identity)
-    {:ok, _pid} = :chumak.bind(socket, :tcp, to_charlist(host), port)
-    {:ok, socket, {host, port}}
+    case :chumak.bind(socket, :tcp, to_charlist(host), port) do
+      {:ok, _pid} ->
+        {:ok, socket, {host, port}}
+      {:error, :eaddrinuse} ->
+        "ZMQ PUSH port #{port} is in use." |> AppLogger.fatal |> exit
+    end
   end
 
   def bind_sub_socket(host, identity, port, topic_name) do
     {:ok, socket} = :chumak.socket(:sub, to_charlist identity)
     :ok = :chumak.subscribe(socket, topic_name)
-    {:ok, _pid} = :chumak.bind(socket, :tcp, to_charlist(host), port)
-    {:ok, socket, {host, port}}
+    case :chumak.bind(socket, :tcp, to_charlist(host), port) do
+      {:ok, _pid} ->
+        {:ok, socket, {host, port}}
+      {:error, :eaddrinuse} ->
+        "ZMQ SUB port #{port} is in use." |> AppLogger.fatal |> exit
+    end
   end
 
   @compile {:nowarn_unused_function, [lookup_pid: 1]}

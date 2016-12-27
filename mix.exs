@@ -79,7 +79,7 @@ defmodule Ringbahn.Mixfile do
       {:retry, "~> 0.6.0"},
       {:netstrings, "~> 2.0"},
       {:uuid, "~> 1.1"},
-      {:bunt, "~> 0.1.0"},
+      {:bunt, "~> 0.2.0", override: true},
       {:goldrush, "~> 0.1.8"},
       {:lager, "~> 3.2"},
       {:chumak, "~> 1.1"},
