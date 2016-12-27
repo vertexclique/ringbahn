@@ -1,0 +1,43 @@
+# The directory Mix will write compiled artifacts to.
+/_build
+
+# If you run "mix test --cover", coverage assets end up here.
+/cover
+
+# The directory Mix downloads your dependencies sources to.
+/deps
+
+# Where 3rd-party dependencies like ExDoc output generated docs.
+/doc
+
+# If the VM crashes, it generates a dump, let's ignore it too.
+erl_crash.dump
+
+# Also ignore archive artifacts (built via "mix archive.build").
+*.ez
+
+# Remove emacs autosaves. Huh!
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# don't include log dir
+log/
+
+# don't include python test backend compiled files
+*.pyc
+test/handlertest/venv
+
+# Don't put the executable
+ringbahn
+
+# No spare files
+.DS_Store
+
+# Don't put tarballs
+*.tar

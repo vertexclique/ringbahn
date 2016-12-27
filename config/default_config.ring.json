@@ -1,0 +1,34 @@
+{
+    "settings": {
+        "backend": "ZMQ",
+        "worker_count": 4,
+        "port_offset": 100,
+        "disable_access_logging": true
+    },
+    "static_dir": {
+        "base": "public",
+        "index_file": "index.html",
+        "default_ctype": "text/plain"
+    },
+    "server": {
+        "pid_file": "/run/ringbahn.pid",
+        "uuid": "edc0a43a-9d93-4d3d-93db-94c3a581ab17",
+        "access_log": "/log/access.log",
+        "error_log": "/log/error.log",
+        "port": 6767,
+        "default_host": "localhost",
+        "hosts": {
+            "localhost": [
+                {
+                    "route": "/test",
+                    "send_spec": "127.0.0.1",
+                    "send_port": 10000,
+                    "send_ident": "f983c23e-9058-4c9c-56ec-7f9f9a34c9ma",
+                    "recv_spec": "127.0.0.1",
+                    "recv_port": 10001,
+                    "recv_ident": "t3ok87np-9058-4c9c-9treu-7f9f9a34c9ka"
+                }
+            ]
+        }
+    }
+}
