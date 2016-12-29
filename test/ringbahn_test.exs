@@ -26,4 +26,8 @@ defmodule RingbahnTest do
     end
     assert length(workers) == worker_count
   end
+
+  test "if invalid config entry supplied it should exit" do
+
+  end
 end

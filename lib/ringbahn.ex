@@ -57,15 +57,25 @@ defmodule Ringbahn do
   def argument_parser(args) do
     if args == [] or args[:config] == nil do
       # Show server banner
-      {:ok, version} = :application.get_key(:ringbahn, :vsn)
-      AppLogger.banner version
+      case :application.get_key(:ringbahn, :vsn) do
+        {:ok, version} ->
+          AppLogger.banner version
+        _ ->
+          nil
+      end
 
       "Switching to default server..."
       |> AppLogger.info
       %{raw_config: get_default_config}
     else
-      {_, default_conf} = File.read args[:config]
-      %{raw_config: default_conf}
+      case File.read args[:config] do
+        {:ok, default_conf} ->
+          %{raw_config: default_conf}
+        {:error, :enoent} ->
+          "Config file not found." |> AppLogger.fatal |> exit
+        {:error, reason} ->
+          "Error occured while reading config file: #{reason}" |> AppLogger.error |> exit
+      end
     end
   end
 
@@ -81,7 +91,7 @@ defmodule Ringbahn do
     config = try do
                Poison.Parser.parse!(raw_config)
              rescue
-               e -> "Config is not valid... #{e}" |> AppLogger.error
+               e in Poison.SyntaxError -> "Config is not valid: #{e.message}" |> AppLogger.fatal |> exit
              end
 
     worker_count = config["settings"]["worker_count"]
